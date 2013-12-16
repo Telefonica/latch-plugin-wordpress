@@ -11,7 +11,7 @@
 */
 
 /*
-Latch Joomla extension - Integrates Latch into the Joomla authentication process.
+Latch Wordpress plugin - Integrates Latch into the Wordpress authentication process.
 Copyright (C) 2013 Eleven Paths
 
 This library is free software; you can redistribute it and/or
