@@ -40,15 +40,15 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 		<form name="loginform" id="loginform" action="" method="post">
 			<p>
 				<label for="code">Latch two-factor token:<br /> 
-				<input type="password" name="latch_two_factor" id="latch_two_factor" class="input" value="" size="20" maxlength="6" /></label>
+				<input type="password" name="latch_two_factor" id="latch_two_factor" class="input" value="" size="20" maxlength="6" autocomplete="off" /></label>
 			</p>
 			<p class="submit">
 				<input type="submit" name="wp-submit" id="wp-submit"
 					class="button button-primary button-large" value="<?php _e("Log In"); ?>"/> 
 				<input type="hidden" name="redirect_to"
 					value="<?php echo site_url(); ?>/wp-admin/" />
-				<input type="hidden" name="log" value="<?php echo $username; ?>" />
-				<input type="hidden" name="pwd" value="<?php echo $password; ?>" />
+                                <input type="hidden" name="log" value="<?php echo htmlspecialchars(stripslashes($username)); ?>" autocomplete="off" />
+				<input type="hidden" name="pwd" value="<?php echo htmlspecialchars(stripslashes($password)); ?>" autocomplete="off" />
 			</p>
 		</form>
 
