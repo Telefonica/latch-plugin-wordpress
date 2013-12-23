@@ -5,7 +5,7 @@
 * Description: Latch WordPress integration
 * Author: Eleven Paths
 * Author URI: http://www.elevenpaths.com/
-* Version: 1.0.0
+* Version: 1.0.3
 * Compatibility: WordPress 3.5
 * Text Domain: latch
 */
@@ -136,8 +136,9 @@ class LatchWP {
 		
 		if (!empty($appId) && !empty($appSecret) ) {
 			$api = new Latch($appId, $appSecret);
+			$userLatchId = get_user_option('latch_id', $user_id);
 			
-			if (!empty($token)) { 
+			if (!empty($token) && empty($userLatchId)) { 
 				$pairResponse = $api->pair($token);
 				$responseData = $pairResponse->getData();
 			
