@@ -32,6 +32,9 @@ Improve your security using Latch...
 
 == Changelog ==
 
+= 1.0.3 =
+* Changed the logic not to perform the pairing process when the user is already paired.
+
 = 1.0.2 =
 * Updated PHP SDK to handle HTTPS connections.
 
