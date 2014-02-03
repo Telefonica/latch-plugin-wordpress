@@ -1,8 +1,7 @@
-LATCH WORDPRESS PLUGIN -- INSTALLATION GUIDE
-----------------------------------------------------
+## LATCH WORDPRESS PLUGIN -- INSTALLATION GUIDE ##
 
-PREREQUISITES
-----------------------------------------------------
+
+### PREREQUISITES ###
 
 * WordPress version 1.5 or later.
 
@@ -11,8 +10,7 @@ PREREQUISITES
 * To get the "Application ID" and "Secret", (fundamental values for integrating Latch in any application), it’s necessary to register a developer account in Latch's website: https://latch.elevenpaths.com. On the upper right side, click on "Developer area".
 
 
-INSTALLING THE MODULE IN WORDPRESS
-----------------------------------------------------
+### INSTALLING THE MODULE IN WORDPRESS ###
 
 1. Once the administrator has downloaded the plugin, it has to be added as a module in its administration panel in WordPress. Click on "Plugins" and "Add new". It will show a form where you can browse and select previously downloaded ZIP file.
 
