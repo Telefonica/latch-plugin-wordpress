@@ -116,8 +116,7 @@ class LatchWP {
 			echo '<label for="latch_token">' . __('Latch token','latch') . '</label></th><td>';
 			echo '<input name="latch_token" id="latch_token"  maxlength="10" type="text" size="25" />';
 		} else {
-			echo '<label for="latch_accountId">' . __('Latch ID','latch') . '</label></th><td>';
-			echo '<input name="latch_accountId" id="latch_accountId" type="text" value="' . esc_attr($latch_id) . '" readonly="readonly" size="80" /> ';
+			echo '<label for="latch_accountId">' . __('Your account is protected with Latch','latch') . '</label></th><td>';
 			echo '<input name="latch_unpair" id="latch_unpair" type="checkbox" /> ' . __("Stop using Latch",'latch') ;
 		}
 		echo '</td></tr></tbody></table>';
