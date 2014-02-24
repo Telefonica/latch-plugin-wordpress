@@ -155,14 +155,8 @@ class LatchWP {
 				}
 				
 			} else if ($_POST['latch_unpair']) {
-				$unpairResponse = $api->unpair(get_user_option('latch_id', $user_id));
-				$responseError = $unpairResponse->getError();
-				
-				if (empty($responseError)) {
-					update_user_option($user_id, 'latch_id', null, true);
-				} else {
-					$errors->add('latch_unpairing_error', 'Latch unpairing error: ' . __($responseError->getMessage()) );
-				}
+				$api->unpair(get_user_option('latch_id', $user_id));
+                                update_user_option($user_id, 'latch_id', null, true);
 			}
 		}
 	}
