@@ -27,3 +27,17 @@
 
 ##UNINSTALLING THE PLUGIN IN WORDPRESS
 * To remove the plugin, the administrator has to click on **"Plugins"** and press the **"Deactivate"** link below the **"Latch"** plugin, and then press the link “Delete”.
+
+
+##USE OF LATCH MODULE FOR THE USERS
+**Latch does not affect in any case or in any way the usual operations with an account. It just allows or denies actions over it, acting as an independent extra layer of security that, once removed or without effect, will have no effect over the accounts, that will remain with its original state.**
+
+The user needs the Latch application installed on the phone, and follow these steps:
+
+* **Step 1:** Logged in your own  WordPress account and go to **"Profile"**.
+
+* **Step 2:** From the Latch app on the phone, the user has to generate the token, pressing on **“generate pairing code to add service"** at the bottom of the application.
+
+* **Step 3:** The user has to type the characters generated on the phone into the text box displayed on the web page. Click on **"Update Profile"** button.
+
+* **Step 4:** Now the user may lock and unlock the account, preventing any unauthorized access.
