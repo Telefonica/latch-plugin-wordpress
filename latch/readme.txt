@@ -1,4 +1,4 @@
-=== LatchWordpress ===
+=== latch ===
 Contributors: it.elevenpaths
 Tags: authentication, security, plugin
 Requires at least: 1.5

@@ -1,6 +1,6 @@
 <?php
 /**
-* Plugin Name: LatchWordpress
+* Plugin Name: latch
 * Plugin URI: http://www.elevenpaths.com
 * Description: Latch WordPress integration
 * Author: Eleven Paths
@@ -33,7 +33,7 @@ require_once("sdk/Latch.php");
 require_once("sdk/LatchResponse.php");
 require_once("sdk/Error.php");
 
-class LatchWordPress {
+class latch {
 
 	/* -------- GLOBAL SETTINGS (admin) --------- */
 
