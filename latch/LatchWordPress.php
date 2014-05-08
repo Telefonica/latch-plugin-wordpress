@@ -1,6 +1,6 @@
 <?php
 /**
-* Plugin Name: Latch
+* Plugin Name: LatchWordpress
 * Plugin URI: http://www.elevenpaths.com
 * Description: Latch WordPress integration
 * Author: Eleven Paths
