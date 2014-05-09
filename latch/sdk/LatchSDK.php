@@ -46,7 +46,7 @@ final class LatchSDK {
 
 
 	public static function setHost($host) {
-            Latch::$API_HOST = $host;
+            LatchSDK::$API_HOST = $host;
 	}
 
         public static function setProxy($host) {

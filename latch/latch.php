@@ -38,17 +38,17 @@ class latch {
 	/* -------- GLOBAL SETTINGS (admin) --------- */
 
 	function action_admin_init() {
-		add_settings_section('latch_settings', 'Global settings', array('LatchWordPress', 'latch_settings_content'), 'latch_settings');
-		add_settings_field('latch_appId', 'Application ID', array('LatchWordPress', 'latch_settings_appId'), 'latch_settings', 'latch_settings');
-		add_settings_field('latch_appSecret', 'Secret key', array('LatchWordPress', 'latch_settings_appSecret'), 'latch_settings', 'latch_settings');
-        add_settings_field('latch_host', 'API URL', array('LatchWordPress', 'latch_settings_host'), 'latch_settings', 'latch_settings');
-		register_setting('latch_settings', 'latch_appId', array('LatchWordPress', 'latch_validate_appId'));
-		register_setting('latch_settings', 'latch_appSecret', array('LatchWordPress', 'latch_validate_appSecret'));
-        register_setting('latch_settings', 'latch_host', array('LatchWordPress', 'latch_validate_host'));
+		add_settings_section('latch_settings', 'Global settings', array('latch', 'latch_settings_content'), 'latch_settings');
+		add_settings_field('latch_appId', 'Application ID', array('latch', 'latch_settings_appId'), 'latch_settings', 'latch_settings');
+		add_settings_field('latch_appSecret', 'Secret key', array('latch', 'latch_settings_appSecret'), 'latch_settings', 'latch_settings');
+            add_settings_field('latch_host', 'API URL', array('latch', 'latch_settings_host'), 'latch_settings', 'latch_settings');
+		register_setting('latch_settings', 'latch_appId', array('latch', 'latch_validate_appId'));
+		register_setting('latch_settings', 'latch_appSecret', array('latch', 'latch_validate_appSecret'));
+            register_setting('latch_settings', 'latch_host', array('latch', 'latch_validate_host'));
 	}
 
 	function action_admin_menu() {
-		add_options_page('Latch settings', 'Latch settings', 'manage_options', 'latch_wordpress', array('LatchWordPress', 'latch_settings_page'));
+		add_options_page('Latch settings', 'Latch settings', 'manage_options', 'latch_wordpress', array('latch', 'latch_settings_page'));
 	}
 
 	function latch_settings_content() {
@@ -128,13 +128,13 @@ class latch {
 		$appId = get_option('latch_appId');
 		$appSecret = get_option('latch_appSecret');
 		$token =  $_POST['latch_token'];
-        $host = get_option('latch_host');
-        if (!empty($host)) {
-            Latch::setHost($host);
-        }
+            $host = get_option('latch_host');
+            if (!empty($host)) {
+                LatchSDK::setHost($host);
+            }
 
 		if (!empty($appId) && !empty($appSecret) ) {
-			$api = new Latch($appId, $appSecret);
+			$api = new LatchSDK($appId, $appSecret);
 			$userLatchId = get_user_option('latch_id', $user_id);
 
 			if (!empty($token) && empty($userLatchId)) {
@@ -172,7 +172,7 @@ class latch {
 			$appSecret = get_option('latch_appSecret');
             $host = get_option('latch_host');
             if (!empty($host)) {
-                Latch::setHost($host);
+                LatchSDK::setHost($host);
             }
 
 			if (!empty($appId) && !empty($appSecret) ) {
@@ -193,7 +193,7 @@ class latch {
 				$latch_accountId = get_user_option('latch_id', $user->ID);
 
 				if (!empty($latch_accountId)) {
-				    $api = new Latch($appId, $appSecret);
+				    $api = new LatchSDK($appId, $appSecret);
 					$statusResponse = $api->status($latch_accountId);
 
 					$responseData = $statusResponse->getData();
@@ -243,10 +243,10 @@ class latch {
 	}
 }
 
-add_action('admin_init', array('LatchWordPress', 'action_admin_init'));
-add_action('admin_menu', array('LatchWordPress', 'action_admin_menu'));
-add_action('profile_personal_options', array('LatchWordPress', 'action_profile_personal_options'));
-add_action('user_profile_update_errors', array('LatchWordPress', 'action_user_profile_update_errors'), 20, 1);
-add_filter('authenticate', array('LatchWordPress', 'filter_authenticate'), 50, 3);
+add_action('admin_init', array('latch', 'action_admin_init'));
+add_action('admin_menu', array('latch', 'action_admin_menu'));
+add_action('profile_personal_options', array('latch', 'action_profile_personal_options'));
+add_action('user_profile_update_errors', array('latch', 'action_user_profile_update_errors'), 20, 1);
+add_filter('authenticate', array('latch', 'filter_authenticate'), 50, 3);
 
 ?>
