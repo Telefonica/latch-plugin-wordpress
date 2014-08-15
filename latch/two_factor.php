@@ -32,7 +32,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 <body class="login login-action-login wp-core-ui">
 	<div id="login">
 		<h1>
-			<a href="" title="<?php _e('Powered by WordPress') ?>"><?php echo bloginfo('name'); ?></a>
+			<a href="" title="<?php _e('Powered by WordPress', 'latch') ?>"><?php echo bloginfo('name'); ?></a>
 		</h1>
 
 		<?php if(!empty($two_factor_error)) { echo '<div id="login_error">' . $two_factor_error . '</div>'; } ?>
@@ -44,7 +44,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 			</p>
 			<p class="submit">
 				<input type="submit" name="wp-submit" id="wp-submit"
-					class="button button-primary button-large" value="<?php _e("Log In"); ?>"/>
+					class="button button-primary button-large" value="<?php _e("Log In", "latch"); ?>"/>
 				<input type="hidden" name="redirect_to"
 					value="<?php echo site_url(); ?>/wp-admin/" />
                                 <input type="hidden" name="log" value="<?php echo htmlspecialchars(stripslashes($username)); ?>" autocomplete="off" />
