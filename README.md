@@ -1,4 +1,7 @@
-﻿#LATCH INSTALLATION GUIDE FOR WORDPRESS
+Below is the original README.md for Latch plugin on WordPress. I've just added support for localization. Check latch/languages folder for instructions.
+________________________________________________________________
+
+#LATCH INSTALLATION GUIDE FOR WORDPRESS
 
 
 ##PREREQUISITES
