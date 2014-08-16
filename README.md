@@ -1,4 +1,4 @@
-Below is the original README.md for Latch plugin on WordPress. I've just added support for localization. Check latch/languages folder for instructions.
+Below are the original README.md instructions for WordPress Latch plugin. I've just added support for localization. Check [latch/languages folder](https://github.com/softbreakers/latch-plugin-wordpress/tree/master/latch/languages) for instructions.
 ________________________________________________________________
 
 #LATCH INSTALLATION GUIDE FOR WORDPRESS
