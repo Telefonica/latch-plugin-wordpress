@@ -246,7 +246,7 @@ class latch {
 	/* -------- LOCALIZATION --------- */
     	
 	function action_load_textdomain_init() {
-		load_plugin_textdomain('latch', false, 'latch/languages');
+		load_plugin_textdomain('latch', false, dirname( plugin_basename( __FILE__ ) ). '/languages/');
 	}
 }
 
