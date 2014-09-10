@@ -3,7 +3,7 @@ Contributors: it.elevenpaths
 Tags: authentication, security, plugin
 Requires at least: 1.5
 Tested up to: 4.0
-Stable tag: 2.0
+Stable tag: 2.1
 License: GPLv2
 
 
@@ -33,6 +33,8 @@ With this version of the Plugin, developers can pair and unpair users and check 
 
 == Changelog ==
 
+= 2.1 =
+*Include spanish translations
 = 2.0 =
 *Change license to GPL v2.0
 = 1.1 =
