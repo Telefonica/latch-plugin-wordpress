@@ -1,0 +1,50 @@
+[
+    {
+        "name": "ElevenPaths/latch-sdk-php",
+        "version": "dev-development",
+        "version_normalized": "dev-development",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ElevenPaths/latch-sdk-php.git",
+            "reference": "8e6d252e0343ac6822d90eb3e55d3c892dacfe63"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ElevenPaths/latch-sdk-php/zipball/8e6d252e0343ac6822d90eb3e55d3c892dacfe63",
+            "reference": "8e6d252e0343ac6822d90eb3e55d3c892dacfe63",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2015-04-14 09:40:57",
+        "type": "sdk",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "ElevenPaths\\Latch\\": "src/"
+            }
+        },
+        "license": [
+            "LGPL-2.1+"
+        ],
+        "authors": [
+            {
+                "name": "ElevenPaths",
+                "email": "elevenpaths@elevenpaths.com"
+            }
+        ],
+        "description": "Latch SDK PHP",
+        "homepage": "https://latch.elevenpaths.com/",
+        "keywords": [
+            "api",
+            "latch",
+            "php",
+            "security"
+        ],
+        "support": {
+            "source": "https://github.com/ElevenPaths/latch-sdk-php/tree/development",
+            "issues": "https://github.com/ElevenPaths/latch-sdk-php/issues"
+        }
+    }
+]
