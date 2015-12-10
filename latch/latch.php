@@ -1,11 +1,11 @@
 <?php
 /**
-* Plugin Name: latch
+* Plugin Name: Latch
 * Plugin URI: http://www.elevenpaths.com
 * Description: Latch WordPress integration
 * Author: Eleven Paths
 * Author URI: http://www.elevenpaths.com/
-* Version: 2.1
+* Version: 2.2
 * Compatibility: WordPress 3.5
 * Text Domain: latch
 */
