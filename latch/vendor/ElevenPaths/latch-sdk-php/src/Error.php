@@ -40,7 +40,7 @@ class Error {
 			error_log("Error creating error object from string " . $json);
 		}
 	}
-	
+
 	public function getCode() {
 		return $this->code;
 	}
@@ -54,9 +54,9 @@ class Error {
 	 * @return JsonObject a Json object with the code and message of the error
 	 */
 	public function toJson() {
-		$error = new JsonObject();
-		$error.addProperty("code", $this->code);
-		$error.addProperty("message", $this->message);
-		return $error;
+		return json_encode([
+			"code" => $this->code,
+			"message" => $this->message
+		]);
 	}
 }

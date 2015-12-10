@@ -40,7 +40,7 @@ class latch {
 
 	/* -------- GLOBAL SETTINGS (admin) --------- */
 
-	function action_admin_init() {
+	static function action_admin_init() {
 		add_settings_section('latch_settings', __('Global settings', 'latch'), array('latch', 'latch_settings_content'), 'latch_settings');
 		add_settings_field('latch_appId', __('Application ID', 'latch'), array('latch', 'latch_settings_appId'), 'latch_settings', 'latch_settings');
 		add_settings_field('latch_appSecret', __('Secret key', 'latch'), array('latch', 'latch_settings_appSecret'), 'latch_settings', 'latch_settings');
@@ -50,30 +50,30 @@ class latch {
             register_setting('latch_settings', 'latch_host', array('latch', 'latch_validate_host'));
 	}
 
-	function action_admin_menu() {
+	static function action_admin_menu() {
 		add_options_page(__('Latch settings', 'latch'), __('Latch settings', 'latch'), 'manage_options', 'latch_wordpress', array('latch', 'latch_settings_page'));
 	}
 
-	function latch_settings_content() {
+	static function latch_settings_content() {
 		_e("Fill in the data received when you registered the application in Latch:", "latch");
 	}
 
-	function latch_settings_appId() {
+	static function latch_settings_appId() {
 		$appId = esc_attr(get_option('latch_appId'));
 		echo '<input id="latch_appId" name="latch_appId" type="text" size="45" maxlength="20" value="' . $appId . '" />';
 	}
 
-	function latch_settings_appSecret() {
+	static function latch_settings_appSecret() {
 		$appSecret = esc_attr(get_option('latch_appSecret'));
 		echo '<input id="latch_appSecret" name="latch_appSecret" size="90" maxlength="40" type="text" value="' . $appSecret . '" />';
 	}
 
-    	function latch_settings_host() {
-        	$host = esc_attr(get_option('latch_host'));
-        	echo '<input id="latch_host" name="latch_host" size="90" type="text" value="' . $host . '" />';
-    	}
+	static function latch_settings_host() {
+        $host = esc_attr(get_option('latch_host'));
+        echo '<input id="latch_host" name="latch_host" size="90" type="text" value="' . $host . '" />';
+    }
 
-	function latch_settings_page() {
+	static function latch_settings_page() {
 		echo '<div><h2>'.__('Latch settings', 'latch').'</h2>';
 		echo '<form action="options.php" method="post">';
 		settings_fields('latch_settings');
@@ -82,7 +82,7 @@ class latch {
 		echo '</form></div>';
 	}
 
-	function latch_validate_appId($appId){
+	static function latch_validate_appId($appId){
 		if (!empty($appId) && strlen($appId) != 20) {
 			add_settings_Error('latch_invalid_appId', 'latch_invalid_appId', __('Invalid application ID', 'latch'));
 			return '';
@@ -91,7 +91,7 @@ class latch {
 		}
 	}
 
-	function latch_validate_appSecret($appSecret){
+	static function latch_validate_appSecret($appSecret){
 		if (!empty($appSecret) && strlen($appSecret) != 40) {
 			add_settings_Error('latch_invalid_appSecret', 'latch_invalid_appSecret', __('Invalid secret key', 'latch'));
 			return '';
@@ -100,14 +100,14 @@ class latch {
 		}
 	}
 
-    	function latch_validate_host($host) {
-	        return rtrim($host, '/');
-    	}
+    static function latch_validate_host($host) {
+        return rtrim($host, '/');
+    }
 
 
 	/* -------- PROFILE SETTINGS (current user) --------- */
 
-	function action_profile_personal_options() {
+	static function action_profile_personal_options() {
 		global $user_id, $is_profile_page;
 
 		$latch_id = trim( get_user_option('latch_id', $user_id ) );
@@ -125,7 +125,7 @@ class latch {
 		echo '</td></tr></tbody></table>';
 	}
 
-	function action_user_profile_update_Errors($Errors) {
+	static function action_user_profile_update_errors($Errors) {
 		global $user_id;
 
 		$appId = get_option('latch_appId');
@@ -167,7 +167,7 @@ class latch {
 
 	/* -------- AUTHENTICATION --------- */
 
-	function filter_authenticate($user, $username = '', $password = '') {
+	static function filter_authenticate($user, $username = '', $password = '') {
 		if (!is_a($user, 'WP_User')) {
 			return $user;
 		} else {
@@ -220,8 +220,10 @@ class latch {
 					}
 
 					if (!empty($responseData) && $responseData->{"operations"}->{$appId}->{"status"} === "on") {
-						$two_factor_token = $responseData->{"operations"}->{$appId}->{"two_factor"}->{"token"};
-
+						$two_factor_token = "";
+						if ($responseData->{"operations"}->{$appId}->{"two_factor"}) {
+							$two_factor_token = $responseData->{"operations"}->{$appId}->{"two_factor"}->{"token"};
+						}
 						if (!empty($two_factor_token)) {
 							update_user_option($user->ID, 'latch_two_factor', $two_factor_token, true);
 
@@ -248,7 +250,7 @@ class latch {
 
 	/* -------- LOCALIZATION --------- */
 
-	function action_load_textdomain_init() {
+	static function action_load_textdomain_init() {
 		load_plugin_textdomain('latch', false, dirname( plugin_basename( __FILE__ ) ). '/languages/');
 	}
 }
@@ -257,7 +259,5 @@ add_action('init', array('latch', 'action_load_textdomain_init'));
 add_action('admin_init', array('latch', 'action_admin_init'));
 add_action('admin_menu', array('latch', 'action_admin_menu'));
 add_action('profile_personal_options', array('latch', 'action_profile_personal_options'));
-add_action('user_profile_update_Errors', array('latch', 'action_user_profile_update_Errors'), 20, 1);
+add_action('user_profile_update_errors', array('latch', 'action_user_profile_update_errors'), 20, 1);
 add_filter('authenticate', array('latch', 'filter_authenticate'), 50, 3);
-
-?>
