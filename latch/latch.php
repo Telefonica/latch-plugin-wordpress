@@ -1,11 +1,11 @@
 <?php
 /**
-* Plugin Name: latch
+* Plugin Name: Latch
 * Plugin URI: http://www.elevenpaths.com
 * Description: Latch WordPress integration
 * Author: Eleven Paths
 * Author URI: http://www.elevenpaths.com/
-* Version: 2.1
+* Version: 2.2
 * Compatibility: WordPress 3.5
 * Text Domain: latch
 */
@@ -29,15 +29,18 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
 
-require_once("sdk/LatchSDK.php");
-require_once("sdk/LatchResponse.php");
-require_once("sdk/Error.php");
+//require_once("sdk/LatchApp.php");
+//require_once("sdk/LatchResponse.php");
+//require_once("sdk/Error.php");
+require_once("vendor/autoload.php");
+
+use ElevenPaths\Latch\LatchApp as LatchApp;
 
 class latch {
 
 	/* -------- GLOBAL SETTINGS (admin) --------- */
 
-	function action_admin_init() {
+	static function action_admin_init() {
 		add_settings_section('latch_settings', __('Global settings', 'latch'), array('latch', 'latch_settings_content'), 'latch_settings');
 		add_settings_field('latch_appId', __('Application ID', 'latch'), array('latch', 'latch_settings_appId'), 'latch_settings', 'latch_settings');
 		add_settings_field('latch_appSecret', __('Secret key', 'latch'), array('latch', 'latch_settings_appSecret'), 'latch_settings', 'latch_settings');
@@ -47,30 +50,30 @@ class latch {
             register_setting('latch_settings', 'latch_host', array('latch', 'latch_validate_host'));
 	}
 
-	function action_admin_menu() {
+	static function action_admin_menu() {
 		add_options_page(__('Latch settings', 'latch'), __('Latch settings', 'latch'), 'manage_options', 'latch_wordpress', array('latch', 'latch_settings_page'));
 	}
 
-	function latch_settings_content() {
+	static function latch_settings_content() {
 		_e("Fill in the data received when you registered the application in Latch:", "latch");
 	}
 
-	function latch_settings_appId() {
+	static function latch_settings_appId() {
 		$appId = esc_attr(get_option('latch_appId'));
 		echo '<input id="latch_appId" name="latch_appId" type="text" size="45" maxlength="20" value="' . $appId . '" />';
 	}
 
-	function latch_settings_appSecret() {
+	static function latch_settings_appSecret() {
 		$appSecret = esc_attr(get_option('latch_appSecret'));
 		echo '<input id="latch_appSecret" name="latch_appSecret" size="90" maxlength="40" type="text" value="' . $appSecret . '" />';
 	}
 
-    	function latch_settings_host() {
-        	$host = esc_attr(get_option('latch_host'));
-        	echo '<input id="latch_host" name="latch_host" size="90" type="text" value="' . $host . '" />';
-    	}
+	static function latch_settings_host() {
+        $host = esc_attr(get_option('latch_host'));
+        echo '<input id="latch_host" name="latch_host" size="90" type="text" value="' . $host . '" />';
+    }
 
-	function latch_settings_page() {
+	static function latch_settings_page() {
 		echo '<div><h2>'.__('Latch settings', 'latch').'</h2>';
 		echo '<form action="options.php" method="post">';
 		settings_fields('latch_settings');
@@ -79,32 +82,32 @@ class latch {
 		echo '</form></div>';
 	}
 
-	function latch_validate_appId($appId){
+	static function latch_validate_appId($appId){
 		if (!empty($appId) && strlen($appId) != 20) {
-			add_settings_error('latch_invalid_appId', 'latch_invalid_appId', __('Invalid application ID', 'latch'));
+			add_settings_Error('latch_invalid_appId', 'latch_invalid_appId', __('Invalid application ID', 'latch'));
 			return '';
 		} else {
 			return $appId;
 		}
 	}
 
-	function latch_validate_appSecret($appSecret){
+	static function latch_validate_appSecret($appSecret){
 		if (!empty($appSecret) && strlen($appSecret) != 40) {
-			add_settings_error('latch_invalid_appSecret', 'latch_invalid_appSecret', __('Invalid secret key', 'latch'));
+			add_settings_Error('latch_invalid_appSecret', 'latch_invalid_appSecret', __('Invalid secret key', 'latch'));
 			return '';
 		} else {
 			return $appSecret;
 		}
 	}
 
-    	function latch_validate_host($host) {
-	        return rtrim($host, '/');
-    	}
+    static function latch_validate_host($host) {
+        return rtrim($host, '/');
+    }
 
 
 	/* -------- PROFILE SETTINGS (current user) --------- */
 
-	function action_profile_personal_options() {
+	static function action_profile_personal_options() {
 		global $user_id, $is_profile_page;
 
 		$latch_id = trim( get_user_option('latch_id', $user_id ) );
@@ -122,7 +125,7 @@ class latch {
 		echo '</td></tr></tbody></table>';
 	}
 
-	function action_user_profile_update_errors($errors) {
+	static function action_user_profile_update_errors($Errors) {
 		global $user_id;
 
 		$appId = get_option('latch_appId');
@@ -130,11 +133,11 @@ class latch {
 		$token =  $_POST['latch_token'];
             $host = get_option('latch_host');
             if (!empty($host)) {
-                LatchSDK::setHost($host);
+                LatchApp::setHost($host);
             }
 
 		if (!empty($appId) && !empty($appSecret) ) {
-			$api = new LatchSDK($appId, $appSecret);
+			$api = new LatchApp($appId, $appSecret);
 			$userLatchId = get_user_option('latch_id', $user_id);
 
 			if (!empty($token) && empty($userLatchId)) {
@@ -148,10 +151,10 @@ class latch {
 				if (!empty($accountId)) {
 					update_user_option($user_id, 'latch_id', $accountId, true);
 				} elseif ($pairResponse->getError() == NULL) {
-                    // If Account ID is empty and no error fields are found, there are problems with the connection to the server
-				    $errors->add('latch_pairing_error', 'Latch pairing error: Cannot connect to the server. Please, try again later.');
+                    // If Account ID is empty and no Error fields are found, there are problems with the connection to the server
+				    $Errors->add('latch_pairing_Error', 'Latch pairing Error: Cannot connect to the server. Please, try again later.');
 				} else {
-					$errors->add('latch_pairing_error', 'Latch pairing error: ' . __($pairResponse->getError()->getMessage()) );
+					$Errors->add('latch_pairing_Error', 'Latch pairing Error: ' . __($pairResponse->getError()->getMessage()) );
 				}
 
 			} else if ($_POST['latch_unpair']) {
@@ -164,7 +167,7 @@ class latch {
 
 	/* -------- AUTHENTICATION --------- */
 
-	function filter_authenticate($user, $username = '', $password = '') {
+	static function filter_authenticate($user, $username = '', $password = '') {
 		if (!is_a($user, 'WP_User')) {
 			return $user;
 		} else {
@@ -172,7 +175,7 @@ class latch {
 			$appSecret = get_option('latch_appSecret');
             $host = get_option('latch_host');
             if (!empty($host)) {
-                LatchSDK::setHost($host);
+                LatchApp::setHost($host);
             }
 
 			if (!empty($appId) && !empty($appSecret) ) {
@@ -186,21 +189,21 @@ class latch {
 					if (!empty($expectedToken) && $_POST["latch_two_factor"] === $expectedToken) {
 						return $user;
 					} else {
-						return new WP_Error('latch_invalid_token', __('<strong>ERROR</strong>: Invalid token', 'latch'));
+						return new WP_Error('latch_invalid_token', __('<strong>Error</strong>: Invalid token', 'latch'));
 					}
 				}
 
 				$latch_accountId = get_user_option('latch_id', $user->ID);
 
 				if (!empty($latch_accountId)) {
-				    $api = new LatchSDK($appId, $appSecret);
+				    $api = new LatchApp($appId, $appSecret);
 					$statusResponse = $api->status($latch_accountId);
 
 					$responseData = $statusResponse->getData();
 					$responseError = $statusResponse->getError();
 
-					//error_log(print_r($responseData, true));
-					//error_log(print_r($responseError, true));
+					//Error_log(print_r($responseData, true));
+					//Error_log(print_r($responseError, true));
 
 					// If something goes wrong, disable Latch temporary or permanently to prevent blocking the user
 					if (empty($statusResponse) || (empty($responseData) && empty($responseError))) {
@@ -217,8 +220,10 @@ class latch {
 					}
 
 					if (!empty($responseData) && $responseData->{"operations"}->{$appId}->{"status"} === "on") {
-						$two_factor_token = $responseData->{"operations"}->{$appId}->{"two_factor"}->{"token"};
-
+						$two_factor_token = "";
+						if ($responseData->{"operations"}->{$appId}->{"two_factor"}) {
+							$two_factor_token = $responseData->{"operations"}->{$appId}->{"two_factor"}->{"token"};
+						}
 						if (!empty($two_factor_token)) {
 							update_user_option($user->ID, 'latch_two_factor', $two_factor_token, true);
 
@@ -230,8 +235,8 @@ class latch {
 
 						return $user;
 					} else {
-						//return new WP_Error('latch_account_blocked', __('<strong>ERROR</strong>: The account is blocked by Latch', 'latch'));
-						return new WP_Error('authentication_failed', __('<strong>ERROR</strong>: Invalid username or incorrect password.', 'latch'));
+						//return new WP_Error('latch_account_blocked', __('<strong>Error</strong>: The account is blocked by Latch', 'latch'));
+						return new WP_Error('authentication_failed', __('<strong>Error</strong>: Invalid username or incorrect password.', 'latch'));
 					}
 				} else {
 					return $user;
@@ -245,7 +250,7 @@ class latch {
 
 	/* -------- LOCALIZATION --------- */
 
-	function action_load_textdomain_init() {
+	static function action_load_textdomain_init() {
 		load_plugin_textdomain('latch', false, dirname( plugin_basename( __FILE__ ) ). '/languages/');
 	}
 }
@@ -256,5 +261,3 @@ add_action('admin_menu', array('latch', 'action_admin_menu'));
 add_action('profile_personal_options', array('latch', 'action_profile_personal_options'));
 add_action('user_profile_update_errors', array('latch', 'action_user_profile_update_errors'), 20, 1);
 add_filter('authenticate', array('latch', 'filter_authenticate'), 50, 3);
-
-?>
