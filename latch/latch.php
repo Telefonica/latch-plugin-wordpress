@@ -83,21 +83,25 @@ class latch {
 	}
 
 	static function latch_validate_appId($appId){
-		if (!empty($appId) && strlen($appId) != 20) {
+		/*if (!empty($appId) && strlen($appId) != 20) {
 			add_settings_Error('latch_invalid_appId', 'latch_invalid_appId', __('Invalid application ID', 'latch'));
 			return '';
 		} else {
 			return $appId;
+		}*/
+		if(!empty($appId) && strlen($appId) != 20){
+			add_settings_Error('latch_invalid_appId', 'latch_invalid_appId', __('Invalid application ID', 'latch'));
+			$appId = '';
 		}
+		return $appId;
 	}
 
 	static function latch_validate_appSecret($appSecret){
 		if (!empty($appSecret) && strlen($appSecret) != 40) {
 			add_settings_Error('latch_invalid_appSecret', 'latch_invalid_appSecret', __('Invalid secret key', 'latch'));
-			return '';
-		} else {
-			return $appSecret;
+			$appSecret = '';
 		}
+		return $appSecret;
 	}
 
     static function latch_validate_host($host) {
@@ -108,9 +112,10 @@ class latch {
 	/* -------- PROFILE SETTINGS (current user) --------- */
 
 	static function action_profile_personal_options() {
-		global $user_id, $is_profile_page;
+		global $user_id;
+		/*global $is_profile_page;*/ // Variable without using
 
-		$latch_id = trim( get_user_option('latch_id', $user_id ) );
+		$latch_id = trim(   get_user_option('latch_id', $user_id ) );
 
 		echo "<h3>" . __( 'Latch Setup', 'latch' ) . "</h3>\n";
 		echo '<table class="form-table"><tbody><th>';

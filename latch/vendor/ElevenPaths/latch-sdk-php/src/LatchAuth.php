@@ -36,6 +36,7 @@ abstract class LatchAuth {
     private static $API_VERSION = "1.0";
     public static $API_HOST = "https://latch.elevenpaths.com";
 
+
     // App API
     public static $API_CHECK_STATUS_URL = "/api/1.0/status";
     public static $API_PAIR_URL = "/api/1.0/pair";
@@ -149,8 +150,8 @@ abstract class LatchAuth {
         curl_setopt($ch, CURLOPT_PROXY, self::$PROXY_HOST);
 
         if ($method == "PUT" || $method == "POST"){
-            $params_string="";
-            foreach($params as $key=>$value) { $params_string .= $key.'='.$value.'&'; }
+            $params_string = "";
+            foreach($params as $key=>$value) {$params_string .= $key.'='.$value.'&';}
             rtrim($params_string, '&');
             curl_setopt($ch,CURLOPT_POST, count($params));
             curl_setopt($ch,CURLOPT_POSTFIELDS, $params_string);
@@ -184,6 +185,7 @@ abstract class LatchAuth {
     protected function HTTP_DELETE_proxy($url) {
         return new LatchResponse($this->HTTP("DELETE", self::$API_HOST . $url, $this->authenticationHeaders("DELETE", $url, null), null));
     }
+
 
     /**
      *
@@ -260,7 +262,16 @@ abstract class LatchAuth {
     }
 
     private function getSerializedParams($params) {
-        if($params != null) {
+        $ret = "";
+        if($params != NULL){
+            ksort($params);
+            foreach($params as $key=>$value){
+                $ret .= $key . "=" . $value . "&";
+            }
+            $ret = trim($ret,"&");
+        }
+        return $ret;
+        /*if($params != null) {
             ksort($params);
             $serializedParams = "";
 
@@ -270,7 +281,7 @@ abstract class LatchAuth {
             return trim($serializedParams, "&");
         } else {
             return "";
-        }
+        }*/
     }
 
     /**
