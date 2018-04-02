@@ -2,8 +2,8 @@
 Contributors: it.elevenpaths
 Tags: authentication, security, plugin
 Requires at least: 1.5
-Tested up to: 4.4
-Stable tag: 2.2
+Tested up to: 4.9.3
+Stable tag: 2.3
 License: GPLv2
 
 
@@ -33,6 +33,8 @@ With this version of the Plugin, developers can pair and unpair users and check 
 
 == Changelog ==
 
+= 2.3 =
+*Compatibility with Wordpress 4.9.3
 = 2.2 =
 *Compatibility with Wordpress 4.4
 = 2.1 =

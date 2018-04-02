@@ -1,8 +1,9 @@
 # LATCH INSTALLATION GUIDE FOR WORDPRESS
 
 
+
 ## PREREQUISITES
- * WordPress version 1.5 or later. (Tested up to 4.4.2)
+ * WordPress version 1.5 or later. (Tested up to 4.9.3)
 
  * Curl extensions active in PHP (uncomment **"extension=php_curl.dll"** or"** extension=curl.so"** in Windows or Linux php.ini respectively.
 
