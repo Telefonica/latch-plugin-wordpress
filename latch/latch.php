@@ -5,8 +5,8 @@
 * Description: Latch WordPress integration
 * Author: Eleven Paths
 * Author URI: http://www.elevenpaths.com/
-* Version: 2.2
-* Compatibility: WordPress 3.5
+* Version: 2.4
+* Compatibility: WordPress 5.2
 * Text Domain: latch
 */
 

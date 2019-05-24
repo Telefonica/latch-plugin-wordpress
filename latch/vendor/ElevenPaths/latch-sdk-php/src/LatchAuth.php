@@ -52,6 +52,7 @@ abstract class LatchAuth {
 
     public static $AUTHORIZATION_HEADER_NAME = "Authorization";
     public static $DATE_HEADER_NAME = "X-11Paths-Date";
+    public static $PLUGIN_HEADER_NAME = "Latch-Plugin-Name";
     public static $AUTHORIZATION_METHOD = "11PATHS";
     public static $AUTHORIZATION_HEADER_FIELD_SEPARATOR = " ";
 
@@ -230,6 +231,7 @@ abstract class LatchAuth {
         $headers = array();
         $headers[self::$AUTHORIZATION_HEADER_NAME] = $authorizationHeader;
         $headers[self::$DATE_HEADER_NAME] = $utc;
+        $headers[self::$PLUGIN_HEADER_NAME] = "Wordpress";
 
         return $headers;
     }
