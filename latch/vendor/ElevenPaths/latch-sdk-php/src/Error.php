@@ -33,7 +33,7 @@ class Error {
 	 */
 	function __construct($json) {
 		$json = is_string($json)? json_decode($json) : $json;
-		if(array_key_exists("code", $json) && array_key_exists("message", $json)) {
+		if(array_key_exists("code", (array) $json) && array_key_exists("message", (array) $json)) {
 			$this->code = $json->{"code"};
 			$this->message = $json->{"message"};
 		} else {
