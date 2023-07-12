@@ -3,15 +3,15 @@
 
 
 ## PREREQUISITES
- * WordPress version 1.5 or later. (Tested up to 5.2)
+ * WordPress version 1.5 or later. (Tested up to 6.2)
 
  * Curl extensions active in PHP (uncomment **"extension=php_curl.dll"** or"** extension=curl.so"** in Windows or Linux php.ini respectively.
 
- * To get the **"Application ID"** and **"Secret"**, (fundamental values for integrating Latch in any application), it’s necessary to register a developer account in [Latch's website](https://latch.elevenpaths.com). On the upper right side, click on **"Developer area"**.
+ * To get the **"Application ID"** and **"Secret"**, (fundamental values for integrating Latch in any application), it’s necessary to register a developer account in [Latch's website](https://latch.telefonica.com). On the upper right side, click on **"Developer area"**.
 
 
 ## DOWNLOADING THE WORDPRESS PLUGIN
- * When the account is activated, the user will be able to create applications with Latch and access to developer documentation, including existing SDKs and plugins. The user has to access again to [Developer area](https://latch.elevenpaths.com/www/developerArea), and browse his applications from **"My applications"** section in the side menu.
+ * When the account is activated, the user will be able to create applications with Latch and access to developer documentation, including existing SDKs and plugins. The user has to access again to [Developer area](https://latch.telefonica.com/www/developerArea), and browse his applications from **"My applications"** section in the side menu.
 
 * When creating an application, two fundamental fields are shown: **"Application ID"** and **"Secret"**, keep these for later use. There are some additional parameters to be chosen, as the application icon (that will be shown in Latch) and whether the application will support OTP  (One Time Password) or not.
 
@@ -19,7 +19,7 @@
 
 
 ## INSTALLING THE PLUGIN IN WORDPRESS
-* Once the administrator has downloaded the plugin from the [releases page](https://github.com/ElevenPaths/latch-plugin-wordpress/releases) , it has to be added as a plugin in its administration panel in WordPress. Click on **"Plugins"** and **"Add new"**. It will show a form where you can browse and select previously downloaded ZIP file.
+* Once the administrator has downloaded the plugin from the [releases page](https://github.com/Telefonica/latch-plugin-wordpress/releases) , it has to be added as a plugin in its administration panel in WordPress. Click on **"Plugins"** and **"Add new"**. It will show a form where you can browse and select previously downloaded ZIP file.
 
 * Go to **"Latch settings"**, inside **"Settings"** and introduce **"Application ID"** and **"Secret"** previously generated. The administrator can now save the changes clicking on **"Save"**. If everything is ok, a confirmation message will be received.
 
@@ -48,13 +48,7 @@ The user needs the Latch application installed on the phone, and follow these st
 * The user should access their WordPress account and under the **“Profile”** section tick the **“Stop using Latch”** box, then tap the **“Update Profile”** button. He will receive a notification indicating that the service has been unpaired.
 
 
-
 ## RESOURCES
-- You can access Latch´s use and installation manuals, together with a list of all available plugins here: [https://latch.elevenpaths.com/www/developers/resources](https://latch.elevenpaths.com/www/developers/resources)
+- You can access Latch´s use and installation manuals, together with a list of all available plugins here: [https://latch.telefonica.com/www/developers/resources](https://latch.telefonica.com/www/developers/resources)
 
-- Further information on de Latch´s API can be found here: [https://latch.elevenpaths.com/www/developers/doc_api](https://latch.elevenpaths.com/www/developers/doc_api)
-
-- For more information about how to use Latch and testing more free features, please refer to the user guide in Spanish and English:
-	1. [English version](https://latch.elevenpaths.com/www/public/documents/howToUseLatchNevele_EN.pdf)
-	1. [Spanish version](https://latch.elevenpaths.com/www/public/documents/howToUseLatchNevele_ES.pdf)
-
+- Further information on de Latch´s API can be found here: [https://latch.telefonica.com/www/developers/doc_api](https://latch.telefonica.com/www/developers/doc_api)
