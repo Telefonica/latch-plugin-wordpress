@@ -3,7 +3,7 @@
 /*
   Latch PHP SDK - Set of  reusable classes to  allow developers integrate Latch on
   their applications.
-  Copyright (C) 2013 Eleven Paths
+  Copyright (C) 2023 Telefonica Digital
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -20,9 +20,9 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-namespace ElevenPaths\Latch;
+namespace Telefonica\Latch;
 
-use ElevenPaths\Latch\LatchApp as LatchApp;
+use Telefonica\Latch\LatchApp as LatchApp;
 
 /**
  *
@@ -31,7 +31,7 @@ use ElevenPaths\Latch\LatchApp as LatchApp;
 final class Latch extends LatchApp {
 
     /**
-     * Create an instance of the class with the Application ID and secret obtained from Eleven Paths
+     * Create an instance of the class with the Application ID and secret obtained from Telefonica Digital
      * @param $appId
      * @param $secretKey
      * @deprecated

@@ -2,7 +2,7 @@
 
 /*
 Latch Wordpress plugin - Integrates Latch into the Wordpress authentication process.
-Copyright (C) 2013 Eleven Paths
+Copyright (C) 2023 Telefonica Digital
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License

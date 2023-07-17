@@ -1,18 +1,18 @@
 <?php
 /**
 * Plugin Name: Latch
-* Plugin URI: http://www.elevenpaths.com
+* Plugin URI: https://latch.telefonica.com
 * Description: Latch WordPress integration
-* Author: Eleven Paths
-* Author URI: http://www.elevenpaths.com/
-* Version: 2.4
-* Compatibility: WordPress 5.2
+* Author: Telefonica Digital
+* Author URI: https://latch.telefonica.com
+* Version: 2.5
+* Compatibility: WordPress 6.2
 * Text Domain: latch
 */
 
 /*
 Latch Wordpress plugin - Integrates Latch into the Wordpress authentication process.
-Copyright (C) 2013 Eleven Paths
+Copyright (C) 2023 Telefonica Digital
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -28,13 +28,9 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
-
-//require_once("sdk/LatchApp.php");
-//require_once("sdk/LatchResponse.php");
-//require_once("sdk/Error.php");
 require_once("vendor/autoload.php");
 
-use ElevenPaths\Latch\LatchApp as LatchApp;
+use Telefonica\Latch\LatchApp as LatchApp;
 
 class latch {
 

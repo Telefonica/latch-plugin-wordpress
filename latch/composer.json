@@ -2,11 +2,11 @@
   "repositories": [
     {
       "type": "vcs",
-      "url": "https://github.com/ElevenPaths/latch-sdk-php"
+      "url": "https://github.com/Telefonica/latch-sdk-php"
     }
   ],
   "require": {
-    "php" : ">=5.3.0",
-    "ElevenPaths/latch-sdk-php": "dev-development"
+    "php" : ">=5.6.32",
+    "telefonica/latch-sdk-php": "1.2.*"
   }
 }
