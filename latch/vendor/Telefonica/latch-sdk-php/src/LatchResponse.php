@@ -3,7 +3,7 @@
 /*
   Latch PHP SDK - Set of  reusable classes to  allow developers integrate Latch on
   their applications.
-  Copyright (C) 2013 Eleven Paths
+  Copyright (C) 2023 Telefonica Digital
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -20,17 +20,15 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-namespace ElevenPaths\Latch;
+namespace Telefonica\Latch;
 
-use ElevenPaths\Latch\Error as Error;
+use Telefonica\Latch\Error as Error;
 
 /**
  * This class models a response from any of the endpoints in the Latch API.
  * It consists of a "data" and an "error" elements. Although normally only one of them will be
  * present, they are not mutually exclusive, since errors can be non fatal, and therefore a response
  * could have valid information in the data field and at the same time inform of an error.
- *
- * @author Jose Palazon <jose@11paths.com>
  *
  */
 class LatchResponse {
@@ -57,7 +55,7 @@ class LatchResponse {
 	
 	/**
 	 *
-	 * @return JsonObject the data part of the API response
+	 * @return JSONObject the data part of the API response
 	 */
 	public function getData() {
 		return $this->data;
@@ -94,11 +92,11 @@ class LatchResponse {
 	public function toJSON() {
 		$response = array();
 		if(!empty($this->data)) {
-			$response["data"] = $data;
+			$response["data"] = $this->data;
 		}
 		
 		if(!empty($error)) {
-			$response["error"] = $error;
+			$response["error"] = $this->error;
 		} 
 		return json_encode($response);
 	}

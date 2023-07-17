@@ -3,7 +3,7 @@
 /*
   Latch PHP SDK - Set of  reusable classes to  allow developers integrate Latch on
   their applications.
-  Copyright (C) 2013 Eleven Paths
+  Copyright (C) 2023 Telefonica Digital
 
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Lesser General Public
@@ -20,10 +20,10 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 
-namespace ElevenPaths\Latch;
+namespace Telefonica\Latch;
 
-use ElevenPaths\Latch\LatchAuth as LatchAuth;
-use ElevenPaths\Latch\LatchResponse as LatchResponse;
+use Telefonica\Latch\LatchAuth as LatchAuth;
+use Telefonica\Latch\LatchResponse as LatchResponse;
 
 /**
  * This class model the API for Applications. Every action here is related to an Application. This
@@ -37,7 +37,7 @@ class LatchApp extends LatchAuth {
 	 * @param $secretKey
 	 */
 	function __construct($appId, $secretKey) {
-        parent::__construct($appId, $secretKey);
+		parent::__construct($appId, $secretKey);
 	}
 
 	public function pairWithId($accountId) {
@@ -48,46 +48,87 @@ class LatchApp extends LatchAuth {
 		return $this->HTTP_GET_proxy(self::$API_PAIR_URL . "/" . $token);
 	}
 
-    public function status($accountId, $silent = false, $nootp = false) {
-        $url = self::$API_CHECK_STATUS_URL . "/" . $accountId;
-        if ($nootp) {
-            $url .= "/nootp";
-        }
-        if ($silent) {
-            $url .= "/silent";
-        }
-        return $this->HTTP_GET_proxy($url);
-    }
+	public function status($accountId, $operationId = null, $instanceId = null, $silent = false, $nootp = false) {
+		$url = self::$API_CHECK_STATUS_URL . "/" . $accountId;
+		if($operationId != null && !empty($operationId)){
+			$url .= "/op/".$operationId;
+		}
+		if($instanceId != null && !empty($instanceId)){
+			$url .= "/i/".$instanceId;
+		}
+		if ($nootp) {
+			$url .= "/nootp";
+		}
+		if ($silent) {
+			$url .= "/silent";
+		}
+		return $this->HTTP_GET_proxy($url);
+	}
 
-    public function operationStatus($accountId, $operationId, $silent=false, $nootp = false) {
-        $url = self::$API_CHECK_STATUS_URL . "/" . $accountId . "/op/" . $operationId;
-        if ($nootp) {
-            $url .= "/nootp";
-        }
-        if ($silent) {
-            $url .= "/silent";
-        }
-        return $this->HTTP_GET_proxy($url);
-    }
+	public function addInstance($accountId, $operationId = null, $instanceName = null){
+		$arr = array();
+		$url = self::$API_INSTANCE_URL."/".$accountId;
+		if($operationId != null && !empty($operationId)){
+			$url .= "/op/".$operationId;
+		}
+		if($instanceName != null && !empty($instanceName)){
+			if(gettype($instanceName) == "array" && count($instanceName) > 0){
+				foreach($instanceName as $key=>$value){
+					$arr["instances"][] = $value;
+				}
+			} else {
+				$arr["instances"] = $instanceName;
+			}
+		}
+		return $this->HTTP_PUT_proxy($url,$arr);
+	}
+
+	public function removeInstance($accountId, $operationId = null, $instanceName = null){
+		$url = self::$API_INSTANCE_URL."/".$accountId;
+		if($operationId != null && !empty($operationId)){
+			$url .= "/op/".$operationId;
+		}
+		if($instanceName != null && !empty($instanceName)){
+			$url .= "/i/".$instanceName;
+		}
+		return $this->HTTP_DELETE_proxy($url);
+	}
+
+	public function operationStatus($accountId, $operationId, $silent=false, $nootp = false) {
+		$url = self::$API_CHECK_STATUS_URL . "/" . $accountId . "/op/" . $operationId;
+		if ($nootp) {
+			$url .= "/nootp";
+		}
+		if ($silent) {
+			$url .= "/silent";
+		}
+		return $this->HTTP_GET_proxy($url);
+	}
 
 	public function unpair($accountId) {
 		return $this->HTTP_GET_proxy(self::$API_UNPAIR_URL . "/" . $accountId);
 	}
 
-	public function lock($accountId, $operationId=null){
-		if ($operationId == null){
-			return $this->HTTP_POST_proxy(self::$API_LOCK_URL . "/" . $accountId, array());
-		}else{
-			return $this->HTTP_POST_proxy(self::$API_LOCK_URL . "/" . $accountId . "/op/" . $operationId, array());
+	public function lock($accountId, $operationId = null, $instance = null){
+		$url = self::$API_LOCK_URL . "/" . $accountId;
+		if($operationId != null && !empty($operationId)){
+			$url .= "/op/".$operationId;
 		}
+		if($instance != null && !empty($instance)){
+			$url .= "/i/".$instance;
+		}
+		return $this->HTTP_POST_proxy($url,array());
 	}
 
-	public function unlock($accountId, $operationId=null){
-		if ($operationId == null){
-			return $this->HTTP_POST_proxy(self::$API_UNLOCK_URL . "/" . $accountId, array());
-		}else{
-			return $this->HTTP_POST_proxy(self::$API_UNLOCK_URL . "/" . $accountId . "/op/" . $operationId, array());
+	public function unlock($accountId, $operationId = null, $instance = null){
+		$url = self::$API_UNLOCK_URL . "/" . $accountId;
+		if($operationId != null && !empty($operationId)){
+			$url .= "/op/".$operationId;
 		}
+		if($instance != null && !empty($instance)){
+			$url .= "/i/".$instance;
+		}
+		return $this->HTTP_POST_proxy($url,array());
 	}
 
 	public function history($accountId, $from=0, $to=null) {
@@ -122,7 +163,7 @@ class LatchApp extends LatchAuth {
 	public function getOperations($operationId=null){
 		if ($operationId == null){
 			return $this->HTTP_GET_proxy(self::$API_OPERATION_URL);
-		}else{
+		} else {
 			return $this->HTTP_GET_proxy(self::$API_OPERATION_URL . "/" . $operationId);
 		}
 	}

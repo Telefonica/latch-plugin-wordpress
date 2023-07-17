@@ -1,33 +1,32 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "b203851c8d41ef9f28b189b66c83a9f8",
-    "content-hash": "1e4941b8ff500a783f7128336f771b17",
+    "content-hash": "4dcb6bb8b6020ecc5bc8dd8647def144",
     "packages": [
         {
-            "name": "ElevenPaths/latch-sdk-php",
-            "version": "dev-development",
+            "name": "Telefonica/latch-sdk-php",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ElevenPaths/latch-sdk-php.git",
-                "reference": "8e6d252e0343ac6822d90eb3e55d3c892dacfe63"
+                "url": "https://github.com/Telefonica/latch-sdk-php.git",
+                "reference": "4c037c1ac0f33b5b548ae48d6d787da5773139af"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ElevenPaths/latch-sdk-php/zipball/8e6d252e0343ac6822d90eb3e55d3c892dacfe63",
-                "reference": "8e6d252e0343ac6822d90eb3e55d3c892dacfe63",
+                "url": "https://api.github.com/repos/Telefonica/latch-sdk-php/zipball/4c037c1ac0f33b5b548ae48d6d787da5773139af",
+                "reference": "4c037c1ac0f33b5b548ae48d6d787da5773139af",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": ">=5.6.32"
             },
             "type": "sdk",
             "autoload": {
                 "psr-4": {
-                    "ElevenPaths\\Latch\\": "src/"
+                    "Telefonica\\Latch\\": "src/"
                 }
             },
             "license": [
@@ -35,12 +34,12 @@
             ],
             "authors": [
                 {
-                    "name": "ElevenPaths",
-                    "email": "elevenpaths@elevenpaths.com"
+                    "name": "TelefonicaDigital",
+                    "email": "soporte.latch@telefonica.com"
                 }
             ],
             "description": "Latch SDK PHP",
-            "homepage": "https://latch.elevenpaths.com/",
+            "homepage": "https://latch.telefonica.com/",
             "keywords": [
                 "api",
                 "latch",
@@ -48,22 +47,21 @@
                 "security"
             ],
             "support": {
-                "source": "https://github.com/ElevenPaths/latch-sdk-php/tree/development",
-                "issues": "https://github.com/ElevenPaths/latch-sdk-php/issues"
+                "source": "https://github.com/Telefonica/latch-sdk-php/tree/1.2.0",
+                "issues": "https://github.com/Telefonica/latch-sdk-php/issues"
             },
-            "time": "2015-04-14 09:40:57"
+            "time": "2023-07-17T15:48:42+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "elevenpaths/latch-sdk-php": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.3.0"
+        "php": ">=5.6.32"
     },
-    "platform-dev": []
+    "platform-dev": [],
+    "plugin-api-version": "2.3.0"
 }

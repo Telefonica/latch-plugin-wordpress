@@ -1,0 +1,28 @@
+{
+  "name": "Telefonica/latch-sdk-php",
+  "type": "sdk",
+  "version": "1.2.0",
+  "description": "Latch SDK PHP",
+  "keywords": [
+    "api",
+    "security",
+    "php",
+    "latch"
+  ],
+  "homepage": "https://latch.telefonica.com/",
+  "license": "LGPL-2.1+",
+  "authors": [
+    {
+      "name" : "TelefonicaDigital",
+      "email": "soporte.latch@telefonica.com"
+    }
+  ],
+  "require": {
+    "php" : ">=5.6.32"
+  },
+  "autoload": {
+    "psr-4": {
+      "Telefonica\\Latch\\": "src/"
+    }
+  }
+}

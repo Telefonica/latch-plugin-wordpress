@@ -2,8 +2,8 @@
 Contributors: it.elevenpaths
 Tags: authentication, security, plugin
 Requires at least: 1.5
-Tested up to: 5.2
-Stable tag: 2.4
+Tested up to: 6.2
+Stable tag: 2.5
 License: GPLv2
 
 
@@ -12,13 +12,13 @@ This Plugin allows developers to integrate Latch on his/her WordPress service.
 == Description ==
 
 This Plugin allows developers to integrate Latch on his/her WordPress service. Latch is a service that lets end-users add an extra level of security to their online accounts and services. 
-With this version of the Plugin, developers can pair and unpair users and check their latches status. For more information please visit https://latch.elevenpaths.com or the Plugin page on GitHub https://github.com/ElevenPaths/latch-plugin-wordpress
+With this version of the Plugin, developers can pair and unpair users and check their latches status. For more information please visit https://latch.telefonica.com or the Plugin page on GitHub https://github.com/Telefonica/latch-plugin-wordpress
 
 
 
 == Installation ==
 
-* When the account is activated, the user will be able to create applications with Latch and access to developer documentation, including existing SDKs and plugins. The user has to access again to [Developer area](https://latch.elevenpaths.com/www/developerArea), and browse his applications from **"My applications"** section in the side menu.
+* When the account is activated, the user will be able to create applications with Latch and access to developer documentation, including existing SDKs and plugins. The user has to access again to [Developer area](https://latch.telefonica.com/www/developerArea), and browse his applications from **"My applications"** section in the side menu.
 
 * When creating an application, two fundamental fields are shown: **"Application ID"** and **"Secret"**, keep these for later use. There are some additional parameters to be chosen, as the application icon (that will be shown in Latch) and whether the application will support OTP  (One Time Password) or not.
 
@@ -32,7 +32,8 @@ With this version of the Plugin, developers can pair and unpair users and check 
 
 
 == Changelog ==
-
+= 2.5 =
+*Compatibility with Wordpress 6.2
 = 2.4 =
 *Compatibility with Wordpress 5.2
 = 2.3 =
